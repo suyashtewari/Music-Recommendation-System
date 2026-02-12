@@ -10,6 +10,6 @@ print("Trying to open:", path)
 print("Exists?", os.path.exists(path))
 
 with h5py.File(path, "r") as f:
-    print(f.keys())  # shows top-level groups
-    print(list(f["metadata"]["songs"].dtype.names))  # shows available columns in metadata
-    print(list(f["analysis"]["songs"].dtype.names))  # shows available columns in analysis
+    print(f.keys())
+    print("METADATA: ", list(f["metadata"]["songs"]["artist_familiarity"]))
+    print("ANALYSIS: ", list(f["analysis"]["songs"].dtype.names))

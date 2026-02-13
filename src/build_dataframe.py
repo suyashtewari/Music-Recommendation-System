@@ -58,8 +58,5 @@ def build_dataframe(dataset_folder, limit=100):
 if __name__ == "__main__":
     df = build_dataframe("./data/small_dataset", limit=200)
     print("Loaded songs:", len(df))
-    print(df.head())
-    print(df.shape)
     df = df.dropna()
-    print(df.dtypes)
     df.to_csv("songs.csv", index=True)

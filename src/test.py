@@ -11,5 +11,5 @@ print("Exists?", os.path.exists(path))
 
 with h5py.File(path, "r") as f:
     print(f.keys())
-    print("METADATA: ", list(f["metadata"]["songs"]["artist_familiarity"]))
+    print("METADATA: ", list(f["metadata"]["songs"]["title"].dtype.names))
     print("ANALYSIS: ", list(f["analysis"]["songs"].dtype.names))

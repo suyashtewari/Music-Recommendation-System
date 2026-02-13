@@ -1,11 +1,34 @@
-from feature_loader import SongFeatureDataset
+from pathlib import Path
 
-dataset = SongFeatureDataset("small_dataset", limit=50)
+from build_dataframe import build_dataframe
+from model import build_feature_matrix, compute_similarity_matrix
+from recommender import recommend, find_song_index
 
-songs = dataset.all_song_ids()
-print("Loaded songs:", len(songs))
 
-song_id = songs[0]
-info = dataset.get_song_info(song_id)
-print("First song:", info["title"], "by", info["artist"])
-print("Features:", info["features"])
+def main():
+    data_path = Path(__file__).resolve().parent.parent / "data/small_dataset"
+
+    df = build_dataframe(data_path, limit=200)
+
+    df = df.dropna().reset_index(drop=True)
+
+    X_scaled = build_feature_matrix(df)
+
+    similarity_matrix = compute_similarity_matrix(X_scaled)
+
+    query = input("Enter a song title: ")
+    idx = find_song_index(df, query)
+
+    if idx is None:
+        return
+
+    print("\nBase Song:")
+    print(df.iloc[idx][["title", "artist_name"]])
+
+    print("\nRecommended Songs:")
+    recommendations = recommend(idx, df, similarity_matrix)
+    print(recommendations)
+
+
+if __name__ == "__main__":
+    main()

@@ -2,11 +2,6 @@ import os
 import h5py
 import pandas as pd
 
-def safe_decode(x):
-    if isinstance(x, bytes):
-        return x.decode("utf-8", errors="ignore")
-    return x
-
 def extract_song_features(file_path):
     try:
         with h5py.File(file_path, "r") as f:
@@ -56,7 +51,7 @@ def build_dataframe(dataset_folder, limit=100):
 
 
 if __name__ == "__main__":
-    df = build_dataframe("./data/small_dataset", limit=200)
+    df = build_dataframe("./data/small_dataset", limit=1200)
     print("Loaded songs:", len(df))
-    df = df.dropna()
+    # df = df.dropna()
     df.to_csv("songs.csv", index=True)

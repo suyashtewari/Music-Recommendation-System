@@ -4,6 +4,8 @@ from build_dataframe import build_dataframe
 from model import build_feature_matrix, compute_similarity_matrix
 from recommender import recommend, find_song_index
 
+from model import compute_pca
+from visualize import plot_songs
 
 def main():
     data_path = Path(__file__).resolve().parent.parent / "data/small_dataset"
@@ -29,6 +31,8 @@ def main():
     recommendations = recommend(idx, df, similarity_matrix)
     print(recommendations)
 
+    X_pca, _ = compute_pca(X_scaled)
+    plot_songs(X_pca, df)
 
 if __name__ == "__main__":
     main()

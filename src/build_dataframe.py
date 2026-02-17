@@ -28,7 +28,7 @@ def extract_song_features(file_path):
         return None
     
 
-def build_dataframe(dataset_folder, limit=100):
+def build_dataframe(dataset_folder, limit=2000):
     rows = []
     count = 0
 
@@ -51,7 +51,7 @@ def build_dataframe(dataset_folder, limit=100):
 
 
 if __name__ == "__main__":
-    df = build_dataframe("./data/small_dataset", limit=1200)
+    df = build_dataframe("data/small_dataset", limit=2000)
     print("Loaded songs:", len(df))
-    # df = df.dropna()
+    df = df.dropna()
     df.to_csv("songs.csv", index=True)

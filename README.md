@@ -63,3 +63,7 @@ Select a song (1-3): 2
 
 ## Dataset Information
 - **Website**: http://millionsongdataset.com/
+
+## Possible Enhancements
+
+- Use one-hot encoding for features such as key, mode, and time signature
